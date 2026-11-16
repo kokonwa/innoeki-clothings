@@ -21,6 +21,35 @@ export default function BrandProfileAndContact() {
     message: "",
   });
 
+  const [sending, setSending] = useState(false);
+  const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  const submitContact = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (sending) return;
+
+    const fields = Object.fromEntries(new FormData(event.currentTarget));
+    setSending(true);
+    setFeedback(null);
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${BRAND.email}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(fields),
+      });
+      const result = await response.json();
+      if (!response.ok || (result.success !== true && result.success !== "true")) {
+        throw new Error("Submission was not accepted");
+      }
+      setForm({ name: "", email: "", topic: "", message: "" });
+      setFeedback({ type: "success", message: "Thank you. Your message was sent." });
+    } catch {
+      setFeedback({ type: "error", message: "We couldn’t send your message. Please try again or contact us on WhatsApp." });
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <>
       {/* Brand story */}
@@ -107,8 +136,7 @@ export default function BrandProfileAndContact() {
             </div>
 
             <form
-              action={`https://formsubmit.co/${BRAND.email}`}
-              method="POST"
+              onSubmit={submitContact}
               className="rounded-3xl border border-stone-200 bg-white p-6 sm:p-8"
             >
               <input type="hidden" name="_subject" value="New Innoeki website enquiry" />
@@ -160,12 +188,17 @@ export default function BrandProfileAndContact() {
                   />
                 </Labeled>
               </div>
-
+              {feedback && (
+                <p role={feedback.type === "error" ? "alert" : "status"} className="mt-4 text-sm text-stone-700">
+                  {feedback.message}
+                </p>
+              )}
               <button
                 type="submit"
+                disabled={sending}
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-cobalt px-6 py-3.5 text-sm font-medium text-white transition hover:bg-cobalt-bright active:scale-[0.98]"
               >
-                <Send size={16} /> Send message
+                <Send size={16} /> {sending ? "Sending…" : "Send message"}
               </button>
             </form>
           </div>

@@ -12,10 +12,29 @@ import {
 } from "lucide-react";
 import { MORNING_SLOTS, AFTERNOON_SLOTS } from "@/data/mockData";
 
+const CONSULTATION_DURATION_MINUTES = 60;
+const CONSULTATION_DURATION = "1 hour";
+const CONSULTATION_FEE = "$10 USD";
+
 const SERVICES = [
-  { id: "car-dealership", name: "Car Dealership", tagline: "Discuss vehicle preferences, budget, and purchase timelines." },
-  { id: "shipping", name: "Shipping", tagline: "Discuss cargo, destinations, delivery timelines, and documentation." },
-  { id: "fabrication", name: "Fabrication (Metallurgy)", tagline: "Discuss materials, specifications, and timelines for metal fabrication." },
+  {
+    id: "car-dealership",
+    name: "Car Dealership",
+    tagline: "Discuss vehicle preferences, budget, and purchase timelines.",
+    preferences: ["Vehicle make, model, or body type", "New or used vehicle", "Budget and purchase timeline"],
+  },
+  {
+    id: "shipping",
+    name: "Shipping",
+    tagline: "Discuss cargo, destinations, delivery timelines, and documentation.",
+    preferences: ["Cargo type, weight, and dimensions", "Pickup location and destination", "Preferred delivery date"],
+  },
+  {
+    id: "fabrication",
+    name: "Fabrication (Metallurgy)",
+    tagline: "Discuss materials, specifications, and timelines for metal fabrication.",
+    preferences: ["Project type and intended use", "Preferred metal, dimensions, and finish", "Drawings, quantities, and target deadline"],
+  },
 ];
 
 type Service = (typeof SERVICES)[number];
@@ -54,7 +73,7 @@ function slotOpen(dateISO: string, slot: string): boolean {
 
 function downloadICS(b: Booking) {
   const dt = new Date(`${b.date}T${to24(b.timeSlot)}`);
-  const end = new Date(dt.getTime() + 90 * 60000);
+  const end = new Date(dt.getTime() + CONSULTATION_DURATION_MINUTES * 60_000);
   const stamp = (d: Date) =>
     d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
   const ics = [
@@ -239,6 +258,8 @@ export default function ConsultationBooking() {
                 </p>
                 <div className="mx-auto mt-6 max-w-md space-y-2 rounded-2xl bg-stone-800 p-5 text-left text-sm">
                   <Row label="Service" value={confirmed.serviceName} />
+                  <Row label="Duration" value={CONSULTATION_DURATION} />
+                  <Row label="Consultation fee" value={CONSULTATION_FEE} />
                   <Row
                     label="When"
                     value={`${format(new Date(confirmed.date), "EEE, MMM d")} · ${confirmed.timeSlot}`}
@@ -293,6 +314,15 @@ export default function ConsultationBooking() {
                         </div>
                         <h4 className="mt-3 font-serif text-xl text-white">{s.name}</h4>
                         <p className="mt-1 text-sm text-stone-400">{s.tagline}</p>
+                        <p className="mt-4 text-xs font-semibold text-stone-200">Suggested preferences</p>
+                        <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-stone-300">
+                          {s.preferences.map((preference) => (
+                            <li key={preference}>{preference}</li>
+                          ))}
+                        </ul>
+                        <p className="mt-auto pt-4 text-sm font-semibold text-white">
+                          {CONSULTATION_DURATION} · {CONSULTATION_FEE}
+                        </p>
                       </button>
                     ))}
                   </div>
@@ -364,7 +394,7 @@ export default function ConsultationBooking() {
                         value={form.notes}
                         onChange={(e) => set("notes", e.target.value)}
                         rows={3}
-                        placeholder="Tell us about your vehicle, shipment, or fabrication project."
+                        placeholder={service?.preferences.join(", ")}
                         className="mt-2 w-full rounded-xl border border-stone-700 bg-stone-900 p-3 text-sm text-white outline-none transition placeholder:text-stone-500 focus:border-cobalt-bright"
                       />
                     </div>
@@ -398,6 +428,8 @@ export default function ConsultationBooking() {
                       <p className="font-serif text-lg text-white">Your booking</p>
                       <div className="mt-3 space-y-2 text-sm">
                         <Row label="Service" value={service?.name || "—"} />
+                        <Row label="Duration" value={CONSULTATION_DURATION} />
+                        <Row label="Consultation fee" value={CONSULTATION_FEE} />
                         <Row
                           label="When"
                           value={

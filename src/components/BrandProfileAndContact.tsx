@@ -1,5 +1,5 @@
 import founderPortrait from "@/assets/frank-ogiakha-innocent.jpeg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import {
   Mail,
@@ -12,29 +12,15 @@ import {
 } from "lucide-react";
 import { BRAND } from "@/data/mockData";
 
-const TOPICS = ["Order enquiry", "Consultation request", "Product question", "Press", "Wholesale", "Other"];
+const TOPICS = ["Order enquiry", "Product question", "Press", "Wholesale", "Other"];
 
-export interface ContactDraft {
-  name: string;
-  email: string;
-  topic: string;
-  message: string;
-}
-
-export default function BrandProfileAndContact({ draft }: { draft: ContactDraft | null }) {
+export default function BrandProfileAndContact() {
   const [form, setForm] = useState({
     name: "",
     email: "",
     topic: TOPICS[0],
     message: "",
   });
-
-  useEffect(() => {
-    if (!draft) return;
-    setForm(draft);
-    window.location.hash = "contact";
-    document.getElementById("contact")?.scrollIntoView({ block: "start" });
-  }, [draft]);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();

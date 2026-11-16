@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProductCatalog from "@/components/ProductCatalog";
 import ConsultationBooking from "@/components/ConsultationBooking";
-import BrandProfileAndContact, { type ContactDraft } from "@/components/BrandProfileAndContact";
+import BrandProfileAndContact from "@/components/BrandProfileAndContact";
 import CartAndCheckoutModal from "@/components/CartAndCheckoutModal";
 import type { CartItem, Product } from "@/data/mockData";
 
@@ -24,7 +24,6 @@ const keyOf = (i: CartItem) => `${i.product.id}|${i.size}|${i.color}`;
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>(loadCart);
   const [cartOpen, setCartOpen] = useState(false);
-  const [contactDraft, setContactDraft] = useState<ContactDraft | null>(null);
 
   useEffect(() => {
     try {
@@ -69,8 +68,8 @@ export default function App() {
       <main>
         <HeroSection />
         <ProductCatalog onAddToCart={addToCart} />
-        <ConsultationBooking onContinueToContact={setContactDraft} />
-        <BrandProfileAndContact draft={contactDraft} />
+        <ConsultationBooking />
+        <BrandProfileAndContact />
       </main>
       <CartAndCheckoutModal
         items={cart}

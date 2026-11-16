@@ -37,6 +37,8 @@ const SERVICES = [
   },
 ];
 
+import type { ContactDraft } from "@/components/BrandProfileAndContact";
+
 type Service = (typeof SERVICES)[number];
 
 interface Booking {
@@ -107,7 +109,28 @@ function to24(slot: string): string {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:00`;
 }
 
-export default function ConsultationBooking() {
+export default function ConsultationBooking({
+  onContinueToContact,
+}: {
+  onContinueToContact: (draft: ContactDraft) => void;
+}) {
+  const continueToContact = (booking: Booking) => {
+    const details = [
+      `Service: ${booking.serviceName}`,
+      `Preferred time: ${booking.date} at ${booking.timeSlot}`,
+      `Duration: ${CONSULTATION_DURATION}`,
+      `Fee: ${CONSULTATION_FEE}`,
+      `Reference: ${booking.ref}`,
+    ];
+    if (booking.clientPhone.trim()) details.push(`Phone: ${booking.clientPhone.trim()}`);
+    onContinueToContact({
+      name: booking.clientName,
+      email: booking.clientEmail,
+      topic: "Consultation request",
+      message: [...details, "", "Project details:", booking.notes].join("\n"),
+    });
+  };
+
   const [step, setStep] = useState(0);
   const [service, setService] = useState<Service | null>(null);
   const [date, setDate] = useState("");
@@ -163,6 +186,7 @@ export default function ConsultationBooking() {
       /* storage unavailable */
     }
     setConfirmed(booking);
+    continueToContact(booking);
     toast.success(`Consultation confirmed — ${ref}`);
   };
 
@@ -268,6 +292,12 @@ export default function ConsultationBooking() {
 
                 </div>
                 <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                  <button
+                    onClick={() => continueToContact(confirmed)}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-ink transition hover:bg-stone-200"
+                  >
+                    Continue to Contact <ArrowRight size={16} />
+                  </button>
                   <button
                     onClick={() => downloadICS(confirmed)}
                     className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-ink transition hover:bg-stone-200 active:scale-[0.98]"
@@ -443,7 +473,7 @@ export default function ConsultationBooking() {
 
                       </div>
                       <p className="mt-4 flex items-center gap-2 text-xs text-stone-400">
-                        Details are saved in this browser only.
+                        Continue to Contact to review your request and open an email draft.
                       </p>
                     </div>
                   </div>
@@ -475,7 +505,7 @@ export default function ConsultationBooking() {
                   disabled={!canNext()}
                   className="inline-flex items-center gap-2 rounded-full bg-cobalt-bright px-6 py-3 text-sm font-medium text-white transition enabled:hover:bg-white enabled:hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  Save consultation details <Check size={16} />
+                  Continue to Contact <Check size={16} />
                 </button>
               )}
             </div>

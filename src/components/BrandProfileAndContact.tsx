@@ -107,12 +107,16 @@ export default function BrandProfileAndContact() {
             </div>
 
             <form
-              onSubmit={(event) => event.preventDefault()}
+              action={`https://formsubmit.co/${BRAND.email}`}
+              method="POST"
               className="rounded-3xl border border-stone-200 bg-white p-6 sm:p-8"
             >
+              <input type="hidden" name="_subject" value="New Innoeki website enquiry" />
               <div className="space-y-4">
                 <Labeled label="Name">
                   <input
+                    name="name"
+                    required
                     value={form.name}
                     onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                     placeholder="Your name"
@@ -122,6 +126,8 @@ export default function BrandProfileAndContact() {
                 <Labeled label="Email">
                   <input
                     type="email"
+                    name="email"
+                    required
                     value={form.email}
                     onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                     placeholder="you@email.com"
@@ -130,6 +136,8 @@ export default function BrandProfileAndContact() {
                 </Labeled>
                 <Labeled label="Topic">
                   <select
+                    name="topic"
+                    required
                     value={form.topic}
                     onChange={(e) => setForm((f) => ({ ...f, topic: e.target.value }))}
                     className="input"
@@ -143,6 +151,8 @@ export default function BrandProfileAndContact() {
                 <Labeled label="Message">
                   <textarea
                     rows={4}
+                    name="message"
+                    required
                     value={form.message}
                     onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
                     placeholder="How can we help?"
@@ -150,10 +160,9 @@ export default function BrandProfileAndContact() {
                   />
                 </Labeled>
               </div>
-              <p className="mt-6 text-sm text-stone-600">Online messaging is currently unavailable. For enquiries, use WhatsApp or call us.</p>
+
               <button
                 type="submit"
-                disabled
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-cobalt px-6 py-3.5 text-sm font-medium text-white transition hover:bg-cobalt-bright active:scale-[0.98]"
               >
                 <Send size={16} /> Send message

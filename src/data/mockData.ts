@@ -1,3 +1,4 @@
+import shirtCollection from "@/assets/three-shirt-storefront.jpg";
 import designerJeans from "@/assets/designer-jeans-collection.jpg";
 import sandalsAndBlackMules from "@/assets/sandals-and-black-mules.jpg";
 import starsAndStripesJacket from "@/assets/stars-and-stripes-jacket.jpeg";
@@ -124,6 +125,7 @@ export const HERO_IMAGE = IMG.hero;
 export const CATEGORIES = [
   "All",
   "Trousers",
+  "Shirts",
   "Tracksuits",
   "Matching Sets",
   "Footwear",
@@ -323,6 +325,21 @@ export const PRODUCTS: Product[] = [
     sizes: [],
     colors: [{ name: "Red, White & Blue", hex: "#264479" }],
     image: starsAndStripesJacket,
+    imageFit: "contain",
+    inStock: true,
+    fitGuide: "Ask us about available sizes before ordering.",
+  },
+  {
+    id: "shirt-collection",
+    name: "Shirt Collection",
+    category: "Shirts",
+    price: 23000,
+    currency: "NGN",
+    description: "Explore the three shirt designs shown and ask about your preferred style and size.",
+    fabricDetails: ["Three shirt designs shown"],
+    sizes: [],
+    colors: [{ name: "Styles shown", hex: "#737373" }],
+    image: shirtCollection,
     imageFit: "contain",
     inStock: true,
     fitGuide: "Ask us about available sizes before ordering.",

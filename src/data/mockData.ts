@@ -1,3 +1,4 @@
+import colourblockTracksuit from "@/assets/colourblock-tracksuit.jpg";
 import drawstringTrousers from "@/assets/relaxed-drawstring-trousers.jpg";
 
 // ---------------------------------------------------------------------------
@@ -114,6 +115,7 @@ export const HERO_IMAGE = IMG.hero;
 export const CATEGORIES = [
   "All",
   "Trousers",
+  "Tracksuits",
   "Outerwear",
   "Tailoring",
   "Essentials",
@@ -155,25 +157,22 @@ export const PRODUCTS: Product[] = [
     fitGuide: "Ask us about available sizes before ordering.",
   },
   {
-    id: "trench",
-    name: "Cropped Cotton Trench",
-    category: "Outerwear",
-    price: 420,
-    salePrice: 336,
-    description:
-      "A modern cropped trench in water-resistant cotton gabardine with storm flap and removable belt.",
-    fabricDetails: [
-      "Water-resistant cotton gabardine",
-      "Removable waist belt",
-      "Horn-look buttons",
-      "Machine wash cold",
+    id: "colourblock-tracksuit",
+    name: "Colourblock Tracksuit Set",
+    category: "Tracksuits",
+    price: 70000,
+    currency: "NGN",
+    description: "A matching zip-up jacket and trousers with bold contrast panels, shown in yellow and blue and in white and blue.",
+    fabricDetails: ["Two-piece set", "Zip-up jacket", "Contrast colour panels"],
+    sizes: [],
+    colors: [
+      { name: "Yellow and Blue", hex: "#f7cb14" },
+      { name: "White and Blue", hex: "#e4edf5" },
     ],
-    sizes: ["XS", "S", "M", "L"],
-    colors: [C.sand, C.charcoal],
-    image: IMG.trench,
-    badge: "Final Cut",
+    image: colourblockTracksuit,
+    imageFit: "contain",
     inStock: true,
-    fitGuide: "True to size with room for a fine knit underneath.",
+    fitGuide: "Ask us about available sizes before ordering.",
   },
   {
     id: "trousers",

@@ -6,7 +6,7 @@ import {
   Phone,
   MapPin,
   Instagram,
-  Linkedin,
+  MessageCircle,
   Send,
   ArrowRight,
 } from "lucide-react";
@@ -28,8 +28,9 @@ export default function BrandProfileAndContact() {
       toast.error("Please add your name, a valid email, and a short message.");
       return;
     }
-    toast.success("Message sent — we reply within one business day.");
-    setForm({ name: "", email: "", topic: TOPICS[0], message: "" });
+    const subject = encodeURIComponent(form.topic);
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
+    window.location.href = `mailto:${BRAND.email}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -95,25 +96,24 @@ export default function BrandProfileAndContact() {
                 Get in touch
               </p>
               <h2 className="mt-3 font-serif text-4xl leading-tight text-ink">
-                Questions about a piece or a fitting?
+                Questions about an item or order?
               </h2>
               <p className="mt-4 max-w-md text-stone-600">
-                Write to the studio and a stylist will reply personally. For
-                bookings, use the consultation scheduler above.
+                Contact us by email, phone, or WhatsApp for product and order enquiries.
               </p>
 
               <div className="mt-8 space-y-4">
                 <ContactRow icon={<Mail size={18} />} label="Email" value={BRAND.email} href={`mailto:${BRAND.email}`} />
-                <ContactRow icon={<Phone size={18} />} label="Phone" value={BRAND.phone} href={`tel:${BRAND.phone.replace(/[^+\d]/g, "")}`} />
-                <ContactRow icon={<MapPin size={18} />} label="Studio" value={`${BRAND.address} · ${BRAND.hours}`} />
+                <ContactRow icon={<Phone size={18} />} label="Phone" value={BRAND.phone} href={BRAND.phoneHref} />
+                <ContactRow icon={<MapPin size={18} />} label="Address" value={BRAND.address} />
               </div>
 
               <div className="mt-8 flex items-center gap-3">
                 <a href={BRAND.instagram} aria-label="Instagram" className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-300 text-ink transition hover:border-cobalt hover:text-cobalt">
                   <Instagram size={19} />
                 </a>
-                <a href={BRAND.pinterest} aria-label="LinkedIn" className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-300 text-ink transition hover:border-cobalt hover:text-cobalt">
-                  <Linkedin size={19} />
+                <a href={BRAND.whatsapp} aria-label="WhatsApp" className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-300 text-ink transition hover:border-cobalt hover:text-cobalt">
+                  <MessageCircle size={19} />
                 </a>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function BrandProfileAndContact() {
                 type="submit"
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-cobalt px-6 py-3.5 text-sm font-medium text-white transition hover:bg-cobalt-bright active:scale-[0.98]"
               >
-                <Send size={16} /> Send message
+                <Send size={16} /> Open email draft
               </button>
             </form>
           </div>
@@ -251,7 +251,7 @@ function Footer() {
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-stone-700/60 pt-6 text-xs text-stone-500 sm:flex-row">
           <p>&copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.</p>
-          <p>Handmade in San Francisco</p>
+          <p>Igando, Lagos, Nigeria</p>
         </div>
       </div>
     </footer>

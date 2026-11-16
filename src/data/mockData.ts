@@ -79,12 +79,13 @@ export const BRAND = {
   shortName: "Innoeki Clothings",
   monogram: "ICI",
   tagline: "Curated Garments. Bespoke Personal Styling.",
-  email: "contact@innoekiclothings.com",
-  phone: "+1 (415) 555-0182",
-  address: "24 Foundry Lane, Studio 3, San Francisco, CA",
+  email: "innoekiclothingsinternational@gmail.com",
+  phone: "08035355194",
+  phoneHref: "tel:+2348035355194",
+  address: "No. 10 AJ Street, Igando, Lagos, Nigeria",
   hours: "Tue to Sat, 10am to 6pm",
-  instagram: "https://instagram.com",
-  pinterest: "https://pinterest.com",
+  instagram: "https://www.instagram.com/innoekiclothingintl2022?cplk=NmllN3c0bXJqdTQx",
+  whatsapp: "https://wa.link/o9ejsl",
   lookbook: "#collection",
 };
 

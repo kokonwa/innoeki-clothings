@@ -1,3 +1,5 @@
+import teeShorts from "@/assets/tee-shorts.jpg";
+import crossStrapSlides from "@/assets/cross-strap-slides.jpg";
 import colourblockTracksuit from "@/assets/colourblock-tracksuit.jpg";
 import drawstringTrousers from "@/assets/relaxed-drawstring-trousers.jpg";
 
@@ -116,6 +118,8 @@ export const CATEGORIES = [
   "All",
   "Trousers",
   "Tracksuits",
+  "Matching Sets",
+  "Footwear",
   "Outerwear",
   "Tailoring",
   "Essentials",
@@ -175,23 +179,22 @@ export const PRODUCTS: Product[] = [
     fitGuide: "Ask us about available sizes before ordering.",
   },
   {
-    id: "trousers",
-    name: "Architectural Wide-Leg Trouser",
-    category: "Tailoring",
-    price: 280,
-    description:
-      "High-rise wide-leg trousers pressed to a sharp crease, falling in a clean column from the hip.",
-    fabricDetails: [
-      "Wool-blend suiting",
-      "Extended tab closure",
-      "Slant pockets",
-      "Dry clean only",
+    id: "oversized-tee-shorts-set",
+    name: "Oversized T-Shirt & Shorts Set",
+    category: "Matching Sets",
+    price: 25000,
+    currency: "NGN",
+    description: "A matching oversized T-shirt and drawstring shorts set, shown in red and pale yellow.",
+    fabricDetails: ["Crew-neck T-shirt", "Drawstring shorts", "Two-piece set"],
+    sizes: [],
+    colors: [
+      { name: "Red", hex: "#a5222d" },
+      { name: "Pale Yellow", hex: "#f3e589" },
     ],
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: [C.charcoal, C.ivory, C.black],
-    image: IMG.trousers,
+    image: teeShorts,
+    imageFit: "contain",
     inStock: true,
-    fitGuide: "High rise, generous leg. Hem to 27in for a full break.",
+    fitGuide: "Ask us about available sizes before ordering.",
   },
   {
     id: "blazer",
@@ -314,24 +317,22 @@ export const PRODUCTS: Product[] = [
     fitGuide: "Made to order. Book a fitting for precise measurement.",
   },
   {
-    id: "tote",
-    name: "Structured Leather Tote",
-    category: "Accessories",
-    price: 520,
-    description:
-      "A hand-finished full-grain leather tote with a rigid base and suede-lined interior.",
-    fabricDetails: [
-      "Full-grain vegetable-tanned leather",
-      "Suede-lined interior",
-      "Rigid structured base",
-      "Made in studio",
+    id: "cross-strap-slide-sandals",
+    name: "Cross-Strap Slide Sandals",
+    category: "Footwear",
+    price: 40000,
+    currency: "NGN",
+    description: "Open-toe slides with wide crossover straps and black soles, shown in tan and olive.",
+    fabricDetails: ["Crossed straps", "Open toe", "Textured outsole"],
+    sizes: [],
+    colors: [
+      { name: "Tan", hex: "#bd8848" },
+      { name: "Olive", hex: "#656e42" },
     ],
-    sizes: ["One Size"],
-    colors: [C.tan, C.black],
-    image: IMG.tote,
-    badge: "Artisanal",
+    image: crossStrapSlides,
+    imageFit: "contain",
     inStock: true,
-    fitGuide: "Fits a 13in laptop and studio samples.",
+    fitGuide: "Ask us about available shoe sizes before ordering.",
   },
   {
     id: "scarf",

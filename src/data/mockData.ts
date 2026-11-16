@@ -1,3 +1,4 @@
+import starsAndStripesJacket from "@/assets/stars-and-stripes-jacket.jpeg";
 import blackSkirtSet from "@/assets/black-high-low-skirt-set.jpeg";
 import bubbleMiniDress from "@/assets/tiered-bubble-mini-dress.jpeg";
 import burgundyMaxi from "@/assets/burgundy-puff-sleeve-maxi.jpg";
@@ -320,23 +321,19 @@ export const PRODUCTS: Product[] = [
     fitGuide: "Ask us about available shoe sizes before ordering.",
   },
   {
-    id: "scarf",
-    name: "Silk Twill Scarf",
-    category: "Accessories",
-    price: 140,
-    description:
-      "A hand-rolled silk twill scarf printed with an abstract indigo and sand marbled motif.",
-    fabricDetails: [
-      "100% silk twill",
-      "Hand-rolled edges",
-      "90 x 90 cm",
-      "Dry clean only",
-    ],
-    sizes: ["One Size"],
-    colors: [C.indigo, C.sand],
-    image: IMG.scarf,
+    id: "stars-and-stripes-jacket",
+    name: "Stars & Stripes Zip-Up Jacket",
+    category: "Outerwear",
+    price: 35000,
+    currency: "NGN",
+    description: "A zip-up jacket with blue star-patterned panels and red and white stripes.",
+    fabricDetails: ["Zip-front closure", "Star and stripe print", "Long sleeves"],
+    sizes: [],
+    colors: [{ name: "Red, White & Blue", hex: "#264479" }],
+    image: starsAndStripesJacket,
+    imageFit: "contain",
     inStock: true,
-    fitGuide: "Generous 90cm square, styled multiple ways.",
+    fitGuide: "Ask us about available sizes before ordering.",
   },
 ];
 

@@ -13,7 +13,7 @@ const CART_KEY = "maren_cart";
 function loadCart(): CartItem[] {
   try {
     const raw = localStorage.getItem(CART_KEY);
-    return raw ? (JSON.parse(raw) as CartItem[]).filter((item) => !["overcoat","trench","trousers","tote", "blazer", "blouse", "linen", "knit"].includes(item.product.id)) : [];
+    return raw ? (JSON.parse(raw) as CartItem[]).filter((item) => !["overcoat","trench","trousers","tote", "blazer", "blouse", "linen", "knit", "scarf"].includes(item.product.id)) : [];
   } catch {
     return [];
   }

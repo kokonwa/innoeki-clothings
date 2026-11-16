@@ -151,7 +151,7 @@ const C = {
   black: { name: "Ink", hex: "#1c1917" },
 };
 
-const CLOTHING_SIZES = ["L", "XL", "XXL", "3XL"];
+const CLOTHING_SIZES = ["S", "M", "L", "XL", "XXL", "3XL"];
 const FOOTWEAR_SIZES = ["40", "41", "42", "43", "44", "45"];
 
 export const PRODUCTS: Product[] = [

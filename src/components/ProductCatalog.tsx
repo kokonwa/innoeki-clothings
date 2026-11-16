@@ -193,13 +193,14 @@ function QuickView({
             {product.sizes.length > 0 && (
               <div>
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">
-                  Size
+                  {product.category === "Footwear" ? "EU shoe size" : "Size"}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {product.sizes.map((s) => (
                     <button
                       key={s}
                       onClick={() => setSize(s)}
+                    aria-pressed={size === s}
                       className={`min-w-11 rounded-lg border px-3 py-2 text-sm font-medium transition ${
                         size === s
                           ? "border-ink bg-ink text-white"
@@ -220,7 +221,7 @@ function QuickView({
 
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">
-                {product.sizes.length ? "Fabric & care" : "Product details"}
+                {product.currency === "NGN" ? "Product details" : "Fabric & care"}
               </p>
               <ul className="space-y-1.5">
                 {product.fabricDetails.map((f) => (
@@ -231,12 +232,12 @@ function QuickView({
               </ul>
             </div>
 
-            {product.sizes.length === 0 ? (
+            {product.currency === "NGN" || product.sizes.length === 0 ? (
               <a
-                href={`mailto:${BRAND.email}?subject=${encodeURIComponent(product.name + " enquiry")}`}
+                href={`mailto:${BRAND.email}?subject=${encodeURIComponent(product.name + " enquiry")}${size ? `&body=${encodeURIComponent(`I would like to enquire about ${product.name} in size ${size}.`)}` : ""}`}
                 className="mt-auto rounded-full bg-cobalt px-6 py-3.5 text-center text-sm font-medium text-white hover:bg-cobalt-bright"
               >
-                Enquire about sizes and ordering
+                {size ? "Enquire about this size" : "Enquire about sizes and ordering"}
               </a>
             ) : (
               <div className="mt-auto flex items-center gap-3 pt-2">

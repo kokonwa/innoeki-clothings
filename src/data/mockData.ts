@@ -151,6 +151,9 @@ const C = {
   black: { name: "Ink", hex: "#1c1917" },
 };
 
+const CLOTHING_SIZES = ["L", "XL", "XXL", "3XL"];
+const FOOTWEAR_SIZES = ["40", "41", "42", "43", "44", "45"];
+
 export const PRODUCTS: Product[] = [
   {
     id: "relaxed-drawstring-trousers",
@@ -215,12 +218,12 @@ export const PRODUCTS: Product[] = [
     currency: "NGN",
     description: "A burgundy maxi dress with puff sleeves, a fitted bodice, and a tiered skirt.",
     fabricDetails: ["Puff sleeves","Fitted bodice","Tiered maxi skirt"],
-    sizes: [],
+    sizes: CLOTHING_SIZES,
     colors: [{ name: "Burgundy", hex: "#722139" }],
     image: burgundyMaxi,
     imageFit: "contain",
     inStock: true,
-    fitGuide: "Ask us about available sizes before ordering.",
+    fitGuide: "Select your size and ask us to confirm availability.",
   },
   {
     id: "red-polka-dot-dress",
@@ -230,12 +233,12 @@ export const PRODUCTS: Product[] = [
     currency: "NGN",
     description: "A red and white polka-dot dress with a V-neck, puff sleeves, and a flared skirt.",
     fabricDetails: ["V-neck","Puff sleeves","Flared skirt"],
-    sizes: [],
+    sizes: CLOTHING_SIZES,
     colors: [{ name: "Red and White", hex: "#c31329" }],
     image: polkaDotDress,
     imageFit: "contain",
     inStock: true,
-    fitGuide: "Ask us about available sizes before ordering.",
+    fitGuide: "Select your size and ask us to confirm availability.",
   },
   {
     id: "black-high-low-skirt-set",
@@ -260,12 +263,12 @@ export const PRODUCTS: Product[] = [
     currency: "NGN",
     description: "A halter-neck mini dress with three voluminous bubble tiers, shown in red, fuchsia, brown, and white.",
     fabricDetails: ["Halter neckline","Three bubble tiers","Mini length"],
-    sizes: [],
+    sizes: CLOTHING_SIZES,
     colors: [{"name":"Red","hex":"#ba122d"},{"name":"Fuchsia","hex":"#a51772"},{"name":"Brown","hex":"#6b3825"},{"name":"White","hex":"#f8f8f6"}],
     image: bubbleMiniDress,
     imageFit: "contain",
     inStock: true,
-    fitGuide: "Ask us about available sizes before ordering.",
+    fitGuide: "Select your size and ask us to confirm availability.",
   },
   {
     id: "sandals-and-black-mules",
@@ -275,12 +278,12 @@ export const PRODUCTS: Product[] = [
     currency: "NGN",
     description: "A selection of sandals and black slip-on mules. Ask about your preferred style and size.",
     fabricDetails: ["Sandal and mule styles", "Slip-on footwear"],
-    sizes: [],
+    sizes: FOOTWEAR_SIZES,
     colors: [{ name: "Styles shown", hex: "#252525" }],
     image: sandalsAndBlackMules,
     imageFit: "contain",
     inStock: true,
-    fitGuide: "Ask us about available shoe sizes before ordering.",
+    fitGuide: "Select your size and ask us to confirm availability.",
   },
   {
     id: "designer-jeans-collection",
@@ -305,7 +308,7 @@ export const PRODUCTS: Product[] = [
     currency: "NGN",
     description: "Open-toe slides with wide crossover straps and black soles, shown in tan and olive.",
     fabricDetails: ["Crossed straps", "Open toe", "Textured outsole"],
-    sizes: [],
+    sizes: FOOTWEAR_SIZES,
     colors: [
       { name: "Tan", hex: "#bd8848" },
       { name: "Olive", hex: "#656e42" },
@@ -313,7 +316,7 @@ export const PRODUCTS: Product[] = [
     image: crossStrapSlides,
     imageFit: "contain",
     inStock: true,
-    fitGuide: "Ask us about available shoe sizes before ordering.",
+    fitGuide: "Select your size and ask us to confirm availability.",
   },
   {
     id: "stars-and-stripes-jacket",
@@ -323,12 +326,12 @@ export const PRODUCTS: Product[] = [
     currency: "NGN",
     description: "A zip-up jacket with blue star-patterned panels and red and white stripes.",
     fabricDetails: ["Zip-front closure", "Star and stripe print", "Long sleeves"],
-    sizes: [],
+    sizes: CLOTHING_SIZES,
     colors: [{ name: "Red, White & Blue", hex: "#264479" }],
     image: starsAndStripesJacket,
     imageFit: "contain",
     inStock: true,
-    fitGuide: "Ask us about available sizes before ordering.",
+    fitGuide: "Select your size and ask us to confirm availability.",
   },
   {
     id: "shirt-collection",
@@ -338,12 +341,12 @@ export const PRODUCTS: Product[] = [
     currency: "NGN",
     description: "Explore the three shirt designs shown and ask about your preferred style and size.",
     fabricDetails: ["Three shirt designs shown"],
-    sizes: [],
+    sizes: CLOTHING_SIZES,
     colors: [{ name: "Styles shown", hex: "#737373" }],
     image: shirtCollection,
     imageFit: "contain",
     inStock: true,
-    fitGuide: "Ask us about available sizes before ordering.",
+    fitGuide: "Select your size and ask us to confirm availability.",
   },
 ];
 

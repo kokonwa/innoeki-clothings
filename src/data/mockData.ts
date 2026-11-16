@@ -78,7 +78,7 @@ export const BRAND = {
   name: "Innoeki Clothings Brand",
   shortName: "Innoeki Clothings",
   monogram: "ICI",
-  tagline: "Curated Garments. Bespoke Personal Styling.",
+  tagline: "Ready-to-wear clothing and footwear from a selection of brands.",
   email: "innoekiclothingsinternational@gmail.com",
   phone: "08035355194",
   phoneHref: "tel:+2348035355194",
@@ -408,12 +408,6 @@ export const BUDGETS = ["Under $500", "$500 to $1,500", "$1,500 to $3,000", "$3,
 // ---------------------------------------------------------------------------
 // Brand story + social proof
 // ---------------------------------------------------------------------------
-export const STATS = [
-  { value: "100%", label: "Sustainable fibers" },
-  { value: "Hand", label: "Finished in studio" },
-  { value: "500+", label: "Clients styled" },
-];
-
 export const TIMELINE = [
   {
     year: "2016",

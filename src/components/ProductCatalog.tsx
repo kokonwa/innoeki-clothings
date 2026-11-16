@@ -60,7 +60,7 @@ function ProductCard({
         )}
         <div className="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/80 to-transparent p-4 transition-transform duration-500 group-hover:translate-y-0">
           <span className="inline-flex items-center gap-1.5 text-sm font-medium text-white">
-            View lookbook details <ArrowRight size={15} />
+            View product details <ArrowRight size={15} />
           </span>
         </div>
       </div>
@@ -303,7 +303,7 @@ export default function ProductCatalog({ onAddToCart }: ProductCatalogProps) {
               The Collection
             </p>
             <h2 className="mt-3 max-w-xl font-serif text-4xl leading-tight text-ink sm:text-5xl">
-              Considered pieces, made to be worn on repeat.
+              Shop ready-to-wear clothing and footwear
             </h2>
           </div>
 

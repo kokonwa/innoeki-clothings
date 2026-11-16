@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Sparkles } from "lucide-react";
-import { BRAND, HERO_IMAGE, STATS } from "@/data/mockData";
+import { ArrowRight, Calendar } from "lucide-react";
+import colourblockTracksuit from "@/assets/colourblock-tracksuit.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -24,16 +24,6 @@ export default function HeroSection() {
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-5 py-10 md:grid-cols-2 md:gap-8 md:px-8">
         {/* Left column */}
         <div className="relative z-10">
-          <motion.div
-            variants={fadeUp}
-            custom={0}
-            initial="hidden"
-            animate="show"
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-cobalt"
-          >
-            <Sparkles size={14} strokeWidth={1.8} />
-            Autumn / Winter Lookbook
-          </motion.div>
 
           <motion.h1
             variants={fadeUp}
@@ -42,8 +32,8 @@ export default function HeroSection() {
             animate="show"
             className="font-serif text-5xl leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-7xl"
           >
-            Curated Garments.
-            <span className="block italic text-cobalt">Bespoke Styling.</span>
+            Ready-to-wear fashion
+            <span className="block italic text-cobalt">from other brands.</span>
           </motion.h1>
 
           <motion.p
@@ -53,8 +43,8 @@ export default function HeroSection() {
             animate="show"
             className="mt-6 max-w-[46ch] text-base leading-relaxed text-stone-600 sm:text-lg"
           >
-            {BRAND.tagline} Considered clothing made in our studio, paired with
-            private styling for the way you actually live.
+            Shop clothing and footwear selected by Innoeki, from casual sets and denim
+            to dresses and sandals.
           </motion.p>
 
           <motion.div
@@ -82,23 +72,6 @@ export default function HeroSection() {
               Book a Consultation
             </a>
           </motion.div>
-
-          <motion.dl
-            variants={fadeUp}
-            custom={4}
-            initial="hidden"
-            animate="show"
-            className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-stone-200 pt-8"
-          >
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <dt className="font-serif text-3xl text-ink">{s.value}</dt>
-                <dd className="mt-1 text-xs uppercase tracking-wide text-stone-500">
-                  {s.label}
-                </dd>
-              </div>
-            ))}
-          </motion.dl>
         </div>
 
         {/* Right column image */}
@@ -110,24 +83,13 @@ export default function HeroSection() {
         >
           <div className="relative overflow-hidden rounded-[2rem] border border-stone-200 bg-white shadow-xl shadow-stone-300/40">
             <img
-              src={HERO_IMAGE}
-              alt="Editorial lookbook of tailored contemporary clothing"
-              className="aspect-[4/5] w-full object-cover md:aspect-[5/6]"
+              src={colourblockTracksuit}
+              alt="Colourblock Tracksuit Set in yellow and blue and in white and blue"
+              className="aspect-[5/4] w-full object-cover"
               loading="eager"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent" />
           </div>
-
-          {/* floating tag */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="absolute -left-4 bottom-8 rounded-2xl border border-stone-200 bg-white/95 px-5 py-4 shadow-lg backdrop-blur sm:-left-8"
-          >
-            <p className="font-serif text-lg leading-none text-ink">Hand-finished</p>
-            <p className="mt-1 text-xs text-stone-500">in the Foundry studio</p>
-          </motion.div>
+          <p className="mt-3 text-sm text-stone-600">Colourblock Tracksuit Set</p>
         </motion.div>
       </div>
     </section>

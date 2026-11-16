@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { BRAND } from "@/data/mockData";
 
-const TOPICS = ["Order enquiry", "Styling question", "Press", "Wholesale", "Other"];
+const TOPICS = ["Order enquiry", "Product question", "Press", "Wholesale", "Other"];
 
 export default function BrandProfileAndContact() {
   const [form, setForm] = useState({
@@ -67,12 +67,12 @@ export default function BrandProfileAndContact() {
               <div className="mt-6 space-y-4 text-base leading-relaxed text-stone-600">
                 <p>
                   Founded by Frank Ogiakha Innocent, Innoeki Clothings Brand is
-                  a ready-to-wear fashion label offering finished clothing
-                  for everyday wear and special occasions.
+                  a fashion retailer in Igando, Lagos. We select and sell ready-made
+                  clothing and footwear from other brands.
                 </p>
                 <p>
-                  Our collections bring together complete outfits and
-                  individual pieces you can pair with what you already wear.
+                  Browse matching sets, dresses, shirts, jeans, and footwear for
+                  everyday wear and special occasions.
                 </p>
               </div>
 

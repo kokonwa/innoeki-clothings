@@ -1,6 +1,5 @@
 import founderPortrait from "@/assets/frank-ogiakha-innocent.jpeg";
 import { useState } from "react";
-import { toast } from "sonner";
 import {
   Mail,
   Phone,
@@ -18,20 +17,9 @@ export default function BrandProfileAndContact() {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    topic: TOPICS[0],
+    topic: "",
     message: "",
   });
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name || !/.+@.+\..+/.test(form.email) || form.message.length < 4) {
-      toast.error("Please add your name, a valid email, and a short message.");
-      return;
-    }
-    const subject = encodeURIComponent(form.topic);
-    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
-    window.location.href = `mailto:${BRAND.email}?subject=${subject}&body=${body}`;
-  };
 
   return (
     <>
@@ -119,7 +107,7 @@ export default function BrandProfileAndContact() {
             </div>
 
             <form
-              onSubmit={submit}
+              onSubmit={(event) => event.preventDefault()}
               className="rounded-3xl border border-stone-200 bg-white p-6 sm:p-8"
             >
               <div className="space-y-4">
@@ -146,6 +134,7 @@ export default function BrandProfileAndContact() {
                     onChange={(e) => setForm((f) => ({ ...f, topic: e.target.value }))}
                     className="input"
                   >
+                    <option value="" disabled>Choose a topic</option>
                     {TOPICS.map((t) => (
                       <option key={t}>{t}</option>
                     ))}
@@ -161,11 +150,13 @@ export default function BrandProfileAndContact() {
                   />
                 </Labeled>
               </div>
+              <p className="mt-6 text-sm text-stone-600">Online messaging is currently unavailable. For enquiries, use WhatsApp or call us.</p>
               <button
                 type="submit"
+                disabled
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-cobalt px-6 py-3.5 text-sm font-medium text-white transition hover:bg-cobalt-bright active:scale-[0.98]"
               >
-                <Send size={16} /> Open email draft
+                <Send size={16} /> Send message
               </button>
             </form>
           </div>

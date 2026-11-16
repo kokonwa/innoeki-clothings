@@ -1,10 +1,7 @@
 import founderPortrait from "@/assets/frank-ogiakha-innocent.jpeg";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { toast } from "sonner";
 import {
-  Quote,
-  Star,
   Mail,
   Phone,
   MapPin,
@@ -13,19 +10,7 @@ import {
   Send,
   ArrowRight,
 } from "lucide-react";
-import {
-  BRAND,
-  TIMELINE,
-  TESTIMONIALS,
-  PRESS,
-} from "@/data/mockData";
-
-const ETHOS = [
-  "Traceable fibers",
-  "Zero-waste cutting",
-  "Made in studio",
-  "Fit-first tailoring",
-];
+import { BRAND } from "@/data/mockData";
 
 const TOPICS = ["Order enquiry", "Styling question", "Press", "Wholesale", "Other"];
 
@@ -76,88 +61,26 @@ export default function BrandProfileAndContact() {
                 The Brand
               </p>
               <h2 className="mt-3 font-serif text-4xl leading-tight text-ink sm:text-5xl">
-                A studio built on fit, fabric, and honesty.
+                About Innoeki
               </h2>
               <div className="mt-6 space-y-4 text-base leading-relaxed text-stone-600">
                 <p>
-                  Innoeki Clothings Brand began at a single cutting table
-                  with one belief: clothing should be made to be lived in, not
-                  photographed and forgotten. Every piece is patterned, sampled,
-                  and finished in our Foundry Lane studio under the direction of
-                  master tailor Frank Ogiakha Innocent.
+                  Founded by Frank Ogiakha Innocent, Innoeki Clothings Brand is
+                  a ready-to-wear fashion label offering finished clothing
+                  for everyday wear and special occasions.
                 </p>
                 <p>
-                  We pair that craft with a personal styling practice, so the
-                  wardrobe you leave with actually fits the life you have. Fewer,
-                  better, made well.
+                  Our collections bring together complete outfits and
+                  individual pieces you can pair with what you already wear.
                 </p>
               </div>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {ETHOS.map((e) => (
-                  <span
-                    key={e}
-                    className="rounded-full border border-stone-300 bg-white px-4 py-2 text-sm font-medium text-ink"
-                  >
-                    {e}
-                  </span>
-                ))}
-              </div>
-
-              {/* Timeline */}
-              <div className="mt-10 space-y-6 border-l border-stone-300 pl-6">
-                {TIMELINE.map((t, i) => (
-                  <motion.div
-                    key={t.year}
-                    initial={{ opacity: 0, x: -12 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.08, duration: 0.5 }}
-                    className="relative"
-                  >
-                    <span className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-cobalt bg-cashmere" />
-                    <p className="font-serif text-xl text-cobalt">{t.year}</p>
-                    <p className="mt-0.5 font-medium text-ink">{t.title}</p>
-                    <p className="mt-1 text-sm text-stone-600">{t.text}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Testimonials */}
-          <div className="mt-20">
-            <h3 className="text-center font-serif text-3xl text-ink">
-              What clients say
-            </h3>
-            <div className="mt-8 grid gap-5 md:grid-cols-3">
-              {TESTIMONIALS.map((t) => (
-                <figure
-                  key={t.name}
-                  className="flex flex-col rounded-2xl border border-stone-200 bg-white p-6"
-                >
-                  <Quote size={26} className="text-cobalt" />
-                  <div className="mt-3 flex gap-0.5 text-cobalt">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} size={14} className="fill-current" />
-                    ))}
-                  </div>
-                  <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-stone-700">
-                    {t.quote}
-                  </blockquote>
-                  <figcaption className="mt-4 border-t border-stone-100 pt-3">
-                    <p className="font-medium text-ink">{t.name}</p>
-                    <p className="text-xs text-stone-500">{t.role}</p>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 opacity-60">
-              {PRESS.map((p) => (
-                <span key={p} className="font-serif text-lg tracking-wide text-ink">
-                  {p}
-                </span>
-              ))}
+              <a
+                href="#collection"
+                className="mt-8 inline-flex items-center gap-2 font-medium text-cobalt hover:underline"
+              >
+                Explore the collection <ArrowRight size={16} />
+              </a>
             </div>
           </div>
         </div>

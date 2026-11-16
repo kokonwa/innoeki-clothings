@@ -1,3 +1,4 @@
+import designerJeans from "@/assets/designer-jeans-collection.jpg";
 import sandalsAndBlackMules from "@/assets/sandals-and-black-mules.jpg";
 import starsAndStripesJacket from "@/assets/stars-and-stripes-jacket.jpeg";
 import blackSkirtSet from "@/assets/black-high-low-skirt-set.jpeg";
@@ -279,24 +280,19 @@ export const PRODUCTS: Product[] = [
     fitGuide: "Ask us about available shoe sizes before ordering.",
   },
   {
-    id: "gown",
-    name: "Draped Evening Gown",
-    category: "Eveningwear",
-    price: 780,
-    description:
-      "A sculptural gown with a gathered side-drape and column skirt in deep cobalt crepe.",
-    fabricDetails: [
-      "Heavy silk crepe",
-      "Gathered side drape",
-      "Concealed back zip",
-      "Dry clean only",
-    ],
-    sizes: ["XS", "S", "M", "L"],
-    colors: [C.cobalt, C.black],
-    image: IMG.gown,
-    badge: "Couture",
-    inStock: false,
-    fitGuide: "Made to order. Book a fitting for precise measurement.",
+    id: "designer-jeans-collection",
+    name: "Designer Jeans Collection",
+    category: "Trousers",
+    price: 20000,
+    currency: "NGN",
+    description: "A selection of four jeans styles. Ask about your preferred style and size.",
+    fabricDetails: ["Denim jeans", "Four styles shown"],
+    sizes: [],
+    colors: [{ name: "Styles shown", hex: "#405572" }],
+    image: designerJeans,
+    imageFit: "contain",
+    inStock: true,
+    fitGuide: "Ask us about available sizes before ordering.",
   },
   {
     id: "cross-strap-slide-sandals",

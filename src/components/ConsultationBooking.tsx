@@ -7,25 +7,33 @@ import {
   ArrowRight,
   ArrowLeft,
   Calendar,
-  Clock,
   Download,
   Sparkles,
-  Scissors,
 } from "lucide-react";
-import {
-  STYLING_SERVICES,
-  MORNING_SLOTS,
-  AFTERNOON_SLOTS,
-  SILHOUETTES,
-  OCCASIONS,
-  COLOR_PREFS,
-  BUDGETS,
-  type Booking,
-  type StylingService,
-} from "@/data/mockData";
+import { MORNING_SLOTS, AFTERNOON_SLOTS } from "@/data/mockData";
+
+const SERVICES = [
+  { id: "car-dealership", name: "Car Dealership", tagline: "Discuss vehicle preferences, budget, and purchase timelines." },
+  { id: "shipping", name: "Shipping", tagline: "Discuss cargo, destinations, delivery timelines, and documentation." },
+  { id: "fabrication", name: "Fabrication (Metallurgy)", tagline: "Discuss materials, specifications, and timelines for metal fabrication." },
+];
+
+type Service = (typeof SERVICES)[number];
+
+interface Booking {
+  ref: string;
+  serviceName: string;
+  date: string;
+  timeSlot: string;
+  clientName: string;
+  clientEmail: string;
+  clientPhone: string;
+  notes: string;
+}
+
 
 const BOOKINGS_KEY = "innoeki_bookings";
-const STEPS = ["Experience", "Schedule", "Style Profile", "Confirm"];
+const STEPS = ["Service", "Schedule", "Project Details", "Review"];
 
 function availableDates(): Date[] {
   const out: Date[] = [];
@@ -52,15 +60,14 @@ function downloadICS(b: Booking) {
   const ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Innoeki Clothings Brand//Styling//EN",
+    "PRODID:-//Innoeki Clothings Brand//Consultation//EN",
     "BEGIN:VEVENT",
     `UID:${b.ref}@innoekiclothings`,
     `DTSTAMP:${stamp(new Date())}`,
     `DTSTART:${stamp(dt)}`,
     `DTEND:${stamp(end)}`,
     `SUMMARY:Innoeki Clothings Brand — ${b.serviceName}`,
-    `DESCRIPTION:Booking ${b.ref}. Styling consultation with Frank Ogiakha Innocent at Innoeki Clothings Brand.`,
-    "LOCATION:24 Foundry Lane, Studio 3, San Francisco",
+    `DESCRIPTION:Proposed consultation. Reference ${b.ref}.`,
     "END:VEVENT",
     "END:VCALENDAR",
   ].join(String.fromCharCode(13, 10));
@@ -83,14 +90,14 @@ function to24(slot: string): string {
 
 export default function ConsultationBooking() {
   const [step, setStep] = useState(0);
-  const [service, setService] = useState<StylingService | null>(null);
+  const [service, setService] = useState<Service | null>(null);
   const [date, setDate] = useState("");
   const [slot, setSlot] = useState("");
   const [form, setForm] = useState({
-    silhouette: "",
-    occasion: "",
-    colorPref: "",
-    budget: "",
+
+
+
+
     notes: "",
     name: "",
     email: "",
@@ -106,8 +113,7 @@ export default function ConsultationBooking() {
   const canNext = () => {
     if (step === 0) return !!service;
     if (step === 1) return !!date && !!slot;
-    if (step === 2)
-      return !!form.silhouette && !!form.occasion && !!form.budget;
+    if (step === 2) return !!form.notes.trim();
     return !!form.name && /.+@.+\..+/.test(form.email);
   };
 
@@ -116,20 +122,20 @@ export default function ConsultationBooking() {
     const ref = "ICI-" + Math.random().toString(36).slice(2, 7).toUpperCase();
     const booking: Booking = {
       ref,
-      serviceId: service.id,
+
       serviceName: service.name,
       date,
       timeSlot: slot,
       clientName: form.name,
       clientEmail: form.email,
       clientPhone: form.phone,
-      silhouette: form.silhouette,
-      occasion: form.occasion,
-      colorPref: form.colorPref,
-      budget: form.budget,
+
+
+
+
       notes: form.notes,
-      status: "Confirmed",
-      createdAt: new Date().toISOString(),
+
+
     };
     try {
       const prev = JSON.parse(localStorage.getItem(BOOKINGS_KEY) || "[]");
@@ -147,10 +153,10 @@ export default function ConsultationBooking() {
     setDate("");
     setSlot("");
     setForm({
-      silhouette: "",
-      occasion: "",
-      colorPref: "",
-      budget: "",
+
+
+
+
       notes: "",
       name: "",
       email: "",
@@ -167,14 +173,13 @@ export default function ConsultationBooking() {
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-cobalt-bright">
-            <Scissors size={14} /> Personal Styling
+            Business Services
           </p>
           <h2 className="mt-3 font-serif text-4xl leading-tight text-white sm:text-5xl">
-            Book a styling consultation.
+            Book a consultation
           </h2>
           <p className="mt-4 text-stone-400">
-            Choose an experience, pick a time, and tell us about your style.
-            You will receive an instant confirmation and calendar invite.
+            Choose a service, select a preferred time, and tell us what you would like to discuss.
           </p>
         </div>
 
@@ -226,20 +231,20 @@ export default function ConsultationBooking() {
                   <Check size={26} />
                 </div>
                 <h3 className="mt-5 font-serif text-3xl text-white">
-                  You are booked in.
+                  Consultation details saved.
                 </h3>
                 <p className="mt-2 text-stone-400">
-                  Booking reference{" "}
+                  Saved reference{" "}
                   <span className="font-semibold text-white">{confirmed.ref}</span>
                 </p>
                 <div className="mx-auto mt-6 max-w-md space-y-2 rounded-2xl bg-stone-800 p-5 text-left text-sm">
-                  <Row label="Experience" value={confirmed.serviceName} />
+                  <Row label="Service" value={confirmed.serviceName} />
                   <Row
                     label="When"
                     value={`${format(new Date(confirmed.date), "EEE, MMM d")} · ${confirmed.timeSlot}`}
                   />
                   <Row label="Name" value={confirmed.clientName} />
-                  <Row label="Occasion" value={confirmed.occasion} />
+
                 </div>
                 <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
                   <button
@@ -266,7 +271,7 @@ export default function ConsultationBooking() {
               >
                 {step === 0 && (
                   <div className="grid gap-4 md:grid-cols-3">
-                    {STYLING_SERVICES.map((s) => (
+                    {SERVICES.map((s) => (
                       <button
                         key={s.id}
                         onClick={() => setService(s)}
@@ -285,24 +290,9 @@ export default function ConsultationBooking() {
                                 : "text-stone-500"
                             }
                           />
-                          <span className="text-xs text-stone-400">{s.duration}</span>
                         </div>
                         <h4 className="mt-3 font-serif text-xl text-white">{s.name}</h4>
                         <p className="mt-1 text-sm text-stone-400">{s.tagline}</p>
-                        <ul className="mt-3 space-y-1.5">
-                          {s.deliverables.map((d) => (
-                            <li
-                              key={d}
-                              className="flex items-start gap-2 text-xs text-stone-300"
-                            >
-                              <Check size={13} className="mt-0.5 shrink-0 text-sage" />
-                              {d}
-                            </li>
-                          ))}
-                        </ul>
-                        <p className="mt-4 text-lg font-semibold text-white">
-                          ${s.price}
-                        </p>
                       </button>
                     ))}
                   </div>
@@ -358,7 +348,7 @@ export default function ConsultationBooking() {
                     </div>
                     {!date && (
                       <p className="mt-4 text-sm text-stone-500">
-                        Pick a date to see available stylist times.
+                        Pick a date to see time options.
                       </p>
                     )}
                   </div>
@@ -366,39 +356,15 @@ export default function ConsultationBooking() {
 
                 {step === 2 && (
                   <div className="space-y-6">
-                    <Chips
-                      label="Silhouette you feel most like yourself in"
-                      options={SILHOUETTES}
-                      value={form.silhouette}
-                      onChange={(v) => set("silhouette", v)}
-                    />
-                    <Chips
-                      label="Main occasion"
-                      options={OCCASIONS}
-                      value={form.occasion}
-                      onChange={(v) => set("occasion", v)}
-                    />
-                    <Chips
-                      label="Colour preference"
-                      options={COLOR_PREFS}
-                      value={form.colorPref}
-                      onChange={(v) => set("colorPref", v)}
-                    />
-                    <Chips
-                      label="Investment range"
-                      options={BUDGETS}
-                      value={form.budget}
-                      onChange={(v) => set("budget", v)}
-                    />
                     <div>
                       <label className="text-sm font-medium text-stone-300">
-                        Anything we should know? (optional)
+                        What would you like to discuss?
                       </label>
                       <textarea
                         value={form.notes}
                         onChange={(e) => set("notes", e.target.value)}
                         rows={3}
-                        placeholder="Fit notes, events, pieces you love..."
+                        placeholder="Tell us about your vehicle, shipment, or fabrication project."
                         className="mt-2 w-full rounded-xl border border-stone-700 bg-stone-900 p-3 text-sm text-white outline-none transition placeholder:text-stone-500 focus:border-cobalt-bright"
                       />
                     </div>
@@ -425,13 +391,13 @@ export default function ConsultationBooking() {
                         label="Phone (optional)"
                         value={form.phone}
                         onChange={(v) => set("phone", v)}
-                        placeholder="+1 (___) ___-____"
+                        placeholder="+234"
                       />
                     </div>
                     <div className="rounded-2xl border border-stone-700 bg-stone-900 p-5">
                       <p className="font-serif text-lg text-white">Your booking</p>
                       <div className="mt-3 space-y-2 text-sm">
-                        <Row label="Experience" value={service?.name || "—"} />
+                        <Row label="Service" value={service?.name || "—"} />
                         <Row
                           label="When"
                           value={
@@ -440,12 +406,12 @@ export default function ConsultationBooking() {
                               : "—"
                           }
                         />
-                        <Row label="Occasion" value={form.occasion || "—"} />
-                        <Row label="Budget" value={form.budget || "—"} />
-                        <Row label="Fee" value={`$${service?.price ?? 0}`} />
+
+
+
                       </div>
                       <p className="mt-4 flex items-center gap-2 text-xs text-stone-400">
-                        <Clock size={13} /> No charge today — pay at your session.
+                        Details are saved in this browser only.
                       </p>
                     </div>
                   </div>
@@ -477,7 +443,7 @@ export default function ConsultationBooking() {
                   disabled={!canNext()}
                   className="inline-flex items-center gap-2 rounded-full bg-cobalt-bright px-6 py-3 text-sm font-medium text-white transition enabled:hover:bg-white enabled:hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  Confirm booking <Check size={16} />
+                  Save consultation details <Check size={16} />
                 </button>
               )}
             </div>
@@ -524,39 +490,6 @@ function SlotGroup({
             </button>
           );
         })}
-      </div>
-    </div>
-  );
-}
-
-function Chips({
-  label,
-  options,
-  value,
-  onChange,
-}: {
-  label: string;
-  options: string[];
-  value: string;
-  onChange: (v: string) => void;
-}) {
-  return (
-    <div>
-      <p className="mb-2 text-sm font-medium text-stone-300">{label}</p>
-      <div className="flex flex-wrap gap-2">
-        {options.map((o) => (
-          <button
-            key={o}
-            onClick={() => onChange(o)}
-            className={`rounded-full border px-4 py-2 text-sm transition ${
-              value === o
-                ? "border-cobalt-bright bg-cobalt-bright text-white"
-                : "border-stone-700 text-stone-300 hover:border-stone-500"
-            }`}
-          >
-            {o}
-          </button>
-        ))}
       </div>
     </div>
   );

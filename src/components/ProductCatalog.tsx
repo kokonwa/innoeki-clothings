@@ -10,6 +10,7 @@ import {
   Ruler,
 } from "lucide-react";
 import {
+  BRAND,
   CATEGORIES,
   PRODUCTS,
   type Product,
@@ -20,7 +21,8 @@ interface ProductCatalogProps {
 }
 
 const price = (p: Product) => (p.salePrice ?? p.price);
-const fmt = (n: number) => `$${n.toLocaleString("en-US")}`;
+const fmt = (n: number, currency?: Product["currency"]) =>
+  currency === "NGN" ? `₦${n.toLocaleString("en-NG")}` : `${n.toLocaleString("en-US")}`;
 
 function ProductCard({
   product,
@@ -44,7 +46,7 @@ function ProductCard({
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="aspect-[3/4] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+          className={`aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-[1.05] ${product.imageFit === "contain" ? "object-contain" : "object-cover"}`}
         />
         {product.badge && (
           <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-cobalt backdrop-blur">
@@ -73,9 +75,9 @@ function ProductCard({
           </h3>
         </div>
         <div className="text-right">
-          <p className="font-medium text-ink">{fmt(price(product))}</p>
+          <p className="font-medium text-ink">{fmt(price(product), product.currency)}</p>
           {product.salePrice && (
-            <p className="text-sm text-stone-400 line-through">{fmt(product.price)}</p>
+            <p className="text-sm text-stone-400 line-through">{fmt(product.price, product.currency)}</p>
           )}
         </div>
       </div>
@@ -135,7 +137,7 @@ function QuickView({
             <img
               src={product.image}
               alt={product.name}
-              className="h-full max-h-[60vh] w-full object-cover md:max-h-none"
+              className={`h-full max-h-[60vh] w-full md:max-h-none ${product.imageFit === "contain" ? "object-contain" : "object-cover"}`}
             />
           </div>
 
@@ -149,11 +151,11 @@ function QuickView({
               </h3>
               <div className="mt-2 flex items-center gap-3">
                 <span className="text-lg font-medium text-ink">
-                  {fmt(price(product))}
+                  {fmt(price(product), product.currency)}
                 </span>
                 {product.salePrice && (
                   <span className="text-stone-400 line-through">
-                    {fmt(product.price)}
+                    {fmt(product.price, product.currency)}
                   </span>
                 )}
               </div>
@@ -188,26 +190,28 @@ function QuickView({
               </div>
             </div>
 
-            <div>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">
-                Size
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {product.sizes.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => setSize(s)}
-                    className={`min-w-11 rounded-lg border px-3 py-2 text-sm font-medium transition ${
-                      size === s
-                        ? "border-ink bg-ink text-white"
-                        : "border-stone-300 text-ink hover:border-stone-400"
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
+            {product.sizes.length > 0 && (
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">
+                  Size
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {product.sizes.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => setSize(s)}
+                      className={`min-w-11 rounded-lg border px-3 py-2 text-sm font-medium transition ${
+                        size === s
+                          ? "border-ink bg-ink text-white"
+                          : "border-stone-300 text-ink hover:border-stone-400"
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="flex items-start gap-2 rounded-xl bg-white p-3 text-sm text-stone-600">
               <Ruler size={16} className="mt-0.5 shrink-0 text-cobalt" />
@@ -216,7 +220,7 @@ function QuickView({
 
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">
-                Fabric & care
+                {product.sizes.length ? "Fabric & care" : "Product details"}
               </p>
               <ul className="space-y-1.5">
                 {product.fabricDetails.map((f) => (
@@ -227,33 +231,42 @@ function QuickView({
               </ul>
             </div>
 
-            <div className="mt-auto flex items-center gap-3 pt-2">
-              <div className="flex items-center rounded-full border border-stone-300">
+            {product.sizes.length === 0 ? (
+              <a
+                href={`mailto:${BRAND.email}?subject=${encodeURIComponent(product.name + " enquiry")}`}
+                className="mt-auto rounded-full bg-cobalt px-6 py-3.5 text-center text-sm font-medium text-white hover:bg-cobalt-bright"
+              >
+                Enquire about sizes and ordering
+              </a>
+            ) : (
+              <div className="mt-auto flex items-center gap-3 pt-2">
+                <div className="flex items-center rounded-full border border-stone-300">
+                  <button
+                    onClick={() => setQty((q) => Math.max(1, q - 1))}
+                    className="px-3.5 py-2.5 text-stone-600 hover:text-ink"
+                  >
+                    &minus;
+                  </button>
+                  <span className="w-6 text-center text-sm font-medium">{qty}</span>
+                  <button
+                    onClick={() => setQty((q) => Math.min(9, q + 1))}
+                    className="px-3.5 py-2.5 text-stone-600 hover:text-ink"
+                  >
+                    +
+                  </button>
+                </div>
                 <button
-                  onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  className="px-3.5 py-2.5 text-stone-600 hover:text-ink"
+                  onClick={() => {
+                    onAddToCart(product, size, color, qty);
+                    onClose();
+                  }}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-cobalt px-6 py-3.5 text-sm font-medium text-white transition hover:bg-cobalt-bright active:scale-[0.98]"
                 >
-                  &minus;
-                </button>
-                <span className="w-6 text-center text-sm font-medium">{qty}</span>
-                <button
-                  onClick={() => setQty((q) => Math.min(9, q + 1))}
-                  className="px-3.5 py-2.5 text-stone-600 hover:text-ink"
-                >
-                  +
+                  <ShoppingBag size={17} />
+                  {product.inStock ? "Add to Bag" : "Enquire to Order"}
                 </button>
               </div>
-              <button
-                onClick={() => {
-                  onAddToCart(product, size, color, qty);
-                  onClose();
-                }}
-                className="flex flex-1 items-center justify-center gap-2 rounded-full bg-cobalt px-6 py-3.5 text-sm font-medium text-white transition hover:bg-cobalt-bright active:scale-[0.98]"
-              >
-                <ShoppingBag size={17} />
-                {product.inStock ? "Add to Bag" : "Enquire to Order"}
-              </button>
-            </div>
+            )}
           </div>
         </div>
       </motion.div>
@@ -276,8 +289,8 @@ export default function ProductCatalog({ onAddToCart }: ProductCatalogProps) {
         p.category.toLowerCase().includes(query.toLowerCase());
       return matchCat && matchQuery;
     });
-    if (sort === "low") list = [...list].sort((a, b) => price(a) - price(b));
-    if (sort === "high") list = [...list].sort((a, b) => price(b) - price(a));
+    if (sort === "low") list = [...list].sort((a, b) => Number(!!b.currency) - Number(!!a.currency) || price(a) - price(b));
+    if (sort === "high") list = [...list].sort((a, b) => Number(!!b.currency) - Number(!!a.currency) || price(b) - price(a));
     return list;
   }, [category, query, sort]);
 

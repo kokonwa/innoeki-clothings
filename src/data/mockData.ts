@@ -1,3 +1,5 @@
+import drawstringTrousers from "@/assets/relaxed-drawstring-trousers.jpg";
+
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -12,6 +14,8 @@ export interface Product {
   category: string;
   price: number;
   salePrice?: number;
+  currency?: "NGN";
+  imageFit?: "contain";
   description: string;
   fabricDetails: string[];
   sizes: string[];
@@ -109,6 +113,7 @@ export const HERO_IMAGE = IMG.hero;
 // ---------------------------------------------------------------------------
 export const CATEGORIES = [
   "All",
+  "Trousers",
   "Outerwear",
   "Tailoring",
   "Essentials",
@@ -131,24 +136,23 @@ const C = {
 
 export const PRODUCTS: Product[] = [
   {
-    id: "overcoat",
-    name: "Camel Wool Overcoat",
-    category: "Outerwear",
-    price: 690,
-    description:
-      "A double-faced wool overcoat cut to fall just below the knee, with concealed placket and softly structured shoulder.",
-    fabricDetails: [
-      "100% Italian double-faced wool",
-      "Unlined for a clean drape",
-      "Corozo buttons",
-      "Dry clean only",
+    id: "relaxed-drawstring-trousers",
+    name: "Relaxed Drawstring Trousers",
+    category: "Trousers",
+    price: 22000,
+    currency: "NGN",
+    description: "Relaxed-leg trousers with a drawstring waist and front pockets, shown in cream, grey, and black.",
+    fabricDetails: ["Drawstring waistband", "Front pockets", "Relaxed leg"],
+    sizes: [],
+    colors: [
+      { name: "Cream", hex: "#f3efe6" },
+      { name: "Grey", hex: "#a8a9ae" },
+      { name: "Black", hex: "#17181c" },
     ],
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: [C.camel, C.charcoal, C.black],
-    image: IMG.overcoat,
-    badge: "Signature",
+    image: drawstringTrousers,
+    imageFit: "contain",
     inStock: true,
-    fitGuide: "Relaxed through the body. Take your usual size for an easy layer.",
+    fitGuide: "Ask us about available sizes before ordering.",
   },
   {
     id: "trench",

@@ -1,3 +1,4 @@
+import sandalsAndBlackMules from "@/assets/sandals-and-black-mules.jpg";
 import starsAndStripesJacket from "@/assets/stars-and-stripes-jacket.jpeg";
 import blackSkirtSet from "@/assets/black-high-low-skirt-set.jpeg";
 import bubbleMiniDress from "@/assets/tiered-bubble-mini-dress.jpeg";
@@ -263,24 +264,19 @@ export const PRODUCTS: Product[] = [
     fitGuide: "Ask us about available sizes before ordering.",
   },
   {
-    id: "slipdress",
-    name: "Silk Column Slip Dress",
-    category: "Eveningwear",
-    price: 395,
-    description:
-      "A bias-cut silk column dress with delicate adjustable straps and a liquid, floor-skimming fall.",
-    fabricDetails: [
-      "100% mulberry silk charmeuse",
-      "Bias cut",
-      "Adjustable straps",
-      "Dry clean only",
-    ],
-    sizes: ["XS", "S", "M", "L"],
-    colors: [C.sage, C.ivory, C.black],
-    image: IMG.slipdress,
-    badge: "Evening",
+    id: "sandals-and-black-mules",
+    name: "Footwear Trio: Sandals & Black Mules",
+    category: "Footwear",
+    price: 40000,
+    currency: "NGN",
+    description: "A selection of sandals and black slip-on mules. Ask about your preferred style and size.",
+    fabricDetails: ["Sandal and mule styles", "Slip-on footwear"],
+    sizes: [],
+    colors: [{ name: "Styles shown", hex: "#252525" }],
+    image: sandalsAndBlackMules,
+    imageFit: "contain",
     inStock: true,
-    fitGuide: "Bias cut hugs the body. Take your usual size.",
+    fitGuide: "Ask us about available shoe sizes before ordering.",
   },
   {
     id: "gown",

@@ -246,7 +246,7 @@ function Footer() {
             href="#consultation"
             className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-ink transition hover:bg-cobalt-bright hover:text-white"
           >
-            Book styling <ArrowRight size={15} />
+            Book a Consultation <ArrowRight size={15} />
           </a>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-stone-700/60 pt-6 text-xs text-stone-500 sm:flex-row">

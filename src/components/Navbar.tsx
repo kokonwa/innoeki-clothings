@@ -81,7 +81,7 @@ export default function Navbar({ cartCount, onOpenCart }: NavbarProps) {
             href="#consultation"
             className="ml-1 hidden rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-cobalt active:scale-[0.98] sm:inline-block"
           >
-            Book Styling
+            Book a Consultation
           </a>
 
           <button
@@ -119,7 +119,7 @@ export default function Navbar({ cartCount, onOpenCart }: NavbarProps) {
                 onClick={() => setMobileOpen(false)}
                 className="mt-3 rounded-full bg-ink py-3 text-center text-sm font-medium text-white"
               >
-                Book Styling
+                Book a Consultation
               </a>
             </div>
           </motion.div>
